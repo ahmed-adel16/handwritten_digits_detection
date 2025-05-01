@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Digit Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Handwritten Digit Prediction</h1>
+    <p>Upload an image of a handwritten digit (28x28)</p>
+
+    <form id="uploadForm" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required />
+        <button type="submit">Upload and Predict</button>
+    </form>
+
+    <div id="result" style="margin-top: 20px;">
+        <p id="prediction"></p>
+    </div>
+
+    <script>
+            document.getElementById('uploadForm').onsubmit = async function (event) {
+            event.preventDefault(); 
+
+            let formData = new FormData(this);
+
+            try {
+                let response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData,
+                });
+                let result = await response.json();
+
+                if (result.predicted_digit !== undefined) {
+                    document.getElementById('prediction').innerText = 
+                        `Predicted Digit: ${result.predicted_digit}`;
+                } else {
+                    document.getElementById('prediction').innerText = 
+                        `Error: ${result.error}`;
+                }
+            } catch (error) {
+                document.getElementById('prediction').innerText = `Error: ${error.message}`;
+            }
+        };
+    </script>
+</body>
+</html>
