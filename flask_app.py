@@ -8,10 +8,12 @@ app = Flask(__name__, template_folder='templates')
 
 model = joblib.load('mlp_model.pkl')  
 
+# Home Page
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Predict operation
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
