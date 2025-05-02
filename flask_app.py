@@ -1,7 +1,6 @@
 import os
 import numpy as np
 from flask import Flask, render_template, request, jsonify
-from sklearn.neural_network import MLPClassifier
 import joblib
 from PIL import Image
 
@@ -28,7 +27,7 @@ def predict():
         return jsonify({'predicted_digit': predicted_digit})
     except Exception as e:
         return jsonify({'error': str(e)})
-import os
+
 print("Current working directory:", os.getcwd())
 
 if __name__ == "__main__":
