@@ -1,0 +1,16 @@
+# install miniconda or anaconda
+# install rtools 4.3
+
+# Type these command in R console:-
+
+1. library(reticulate)
+
+2. conda_create("r-reticulate")
+
+3. conda_install("r-reticulate", packages = c("tensorflow", "numpy", "matplotlib", "scipy", "pandas", "scikit-learn"))
+
+4. use_condaenv("r-reticulate", required = TRUE)
+
+5. library(tensorflow)
+
+6. tf$constant("TensorFlow works!")
